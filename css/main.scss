@@ -22,6 +22,17 @@ $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
+$zIndex-0: 0;
+$zIndex-1: 900;
+$zIndex-2: 700;
+$zIndex-3: 500;
+$zIndex-4: 300;
+$zIndex-5: 100;
+
+$navbar_Zindex: $zIndex-1;
+$navbar-bg_Zindex: $zIndex-2;
+
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import "base";
 @import "home";
