@@ -1,4 +1,35 @@
 (function( $ ) {
+
+  $.fn.navSticky = function() {
+    var $navbar = $('.navbar');
+    var $navbarBg = $('.navbar--bg');
+    var $navbarHeight = $navbarBg.outerHeight();
+    var $header = $('.headline');
+    var headerHeight = $header.outerHeight();
+
+    $(document).scroll(function() {
+        var scrollTop = $(this).scrollTop();
+        var opacityHeight = headerHeight - ($navbarHeight * 2);
+        var calc = scrollTop / opacityHeight;
+
+        if ( calc >= '1' ) {
+          $navbar.addClass('fixed');
+          $navbarBg.css({
+            'opacity': 1
+          });
+        } else if ( calc < '0' ) {
+          $navbarBg.css({
+            'opacity': 0
+          });
+        } else {
+          $navbar.removeClass('fixed');
+          $navbarBg.css({
+            'opacity': calc
+          });
+        }
+    });
+  }
+
   $.fn.headlineAnim = function() {
     var $this = $(this);
     var content = $('.content');
@@ -34,7 +65,7 @@
     }
     $(document).scroll(function() {
       var scrollTop = $(this).scrollTop();
-      if ( scrollTop >= content.offset().top + 16 && navLeft >  0 && navWidth > 232 ) {
+      if ( scrollTop >= content.offset().top - 36 && navLeft >  0 && navWidth > 232 ) {
         $this.addClass('fixed');
       } else {
         $this.removeClass('fixed');
@@ -44,8 +75,9 @@
 })( jQuery );
 
 $(document).ready(function(){
-  $('.team-nav').teamNavSticky();
+  $('.navbar').navSticky();
   $('.headline').headlineAnim();
+  $('.team-nav').teamNavSticky();
 });
 
 $(window).resize(function() {
